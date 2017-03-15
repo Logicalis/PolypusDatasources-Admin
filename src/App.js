@@ -1,41 +1,55 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import {Admin, Resource, Delete } from 'admin-on-rest';
+import {Navbar, Nav, NavItem} from  'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
-import restClient from './restClient';
+import { LinkContainer } from 'react-router-bootstrap';
 
-import { DataSourceList, DataSourceEdit} from './datasources';
-import { AdapterList, AdapterEdit} from './adapters';
+import Service from './Service';
 
-var apiUrl = 'http://localhost:4000/api';
+import Home from './Home';
 
-import AdatpersData from './adaptersData';
-
-var adapters = AdatpersData(apiUrl);
 
 class App extends Component {
 
   constructor(){
     super();
     this.state = {
-      adapters: {}
     };
   }
   
   componentWillMount(){
-    AdatpersData(apiUrl).then((adapters) => {
-      this.setState({adapters})
-    });
+
   }
 
   render() {
-    console.log(this.state.adapters);
     return (
-      <Admin title="DataSourceAPI" restClient={restClient(apiUrl)}>
-        <Resource name="datasources" list={DataSourceList} edit={DataSourceEdit} delete={Delete} adapters={adapters} />
-        <Resource name="adapters" list={AdapterList} edit={AdapterEdit} delete={Delete}/>
-      </Admin>
+      <Router>
+        <div>
+          <Navbar inverse fixedTop>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="#">DataSourceAPI</a>
+              </Navbar.Brand>
+            </Navbar.Header>
+            <Nav>
+              <li><Link to="/datasources">DataSources</Link></li>
+              <li><Link to="/queries">Queries</Link></li>
+            </Nav>
+          </Navbar>
+          
+          <div className="container">
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/datasources" component={Home}/>
+            <Route exact path="/queries" component={Home}/>
+          </div>
+          </div>
+      </Router>
     );
   }
 }

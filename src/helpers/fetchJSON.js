@@ -30,11 +30,5 @@ const fetchJson = (url, options = {}) => {
         });
 };
 
-const queryParameters = (data) => Object.keys(data)
-    .map(key => [key, data[key]].map(encodeURIComponent).join('='))
-    .join('&');
 
-module.exports = {
-    queryParameters,
-    fetchJson
-}
+module.exports = fetchJson;

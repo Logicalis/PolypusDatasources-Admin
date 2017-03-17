@@ -58,7 +58,7 @@ class DataSources extends Component {
                 <h1>DataSources</h1>
                 <div>Count: {this.state.datasources.length}</div>
                 <ButtonToolbar style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button bsStyle="primary">Create new</Button>
+                    <Button onClick={()=>{this.props.history.push("/datasources/new")}} bsStyle="primary">Create new</Button>
                     <Button onClick={this.getDataSources}><Glyphicon glyph="refresh"/></Button>
                 </ButtonToolbar>
                 <Table responsive>

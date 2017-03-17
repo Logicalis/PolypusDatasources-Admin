@@ -6,6 +6,7 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "alertifyjs": "^1.9.0",
     "big-text.js": "^1.0.0",
     "classnames": "^2.2.5",
     "react": "^15.4.2",

@@ -6,7 +6,11 @@ import Form from "react-jsonschema-form";
 import AdapterService from '../service/AdapterService';
 import DataSourceService from '../service/DataSourceService';
 
-import toastr from 'toastr';
+import alertify from 'alertifyjs';
+import '../../node_modules/alertifyjs/build/css/alertify.min.css';
+import '../../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+
+import {Button, ButtonToolbar} from 'react-bootstrap';
 
 var defaultSchema = {
     "title":"DataSource",
@@ -68,8 +72,8 @@ class EditDataSource extends Component {
             schema: defaultSchema,
             uiSchema: uiSchema,
             adapters:[],
-            datasource: null,
-            editing: props.match.params.id ? true : false
+            datasource: {},
+            editing: props.match.params.id ? true : false,
         }
 
         this.selectedAdapter = null;
@@ -104,33 +108,40 @@ class EditDataSource extends Component {
                     this.setState({
                         datasource
                     });
+                    this.updateAdapterProperties(datasource);
                 });
             }
         });
     }
 
     onFormChange = (event)=>{
-        if(this.selectedAdapter !== event.formData.adapter){
-            this.selectedAdapter = event.formData.adapter;
-            let adapter = this.state.adapters.find((adapter) => {
-                return adapter.name === this.selectedAdapter;
-            });
-            
-            if(typeof adapter !== "undefined"){
-                this.setState({schema:{
-                        ...this.state.schema,
-                        properties:{
-                            ...this.state.schema.properties,
-                            dataSourceProperties: adapter.dataSourcePropertiesSchema
-                        }
+        let datasource = event.formData;
+        this.setState({datasource});
+        if(this.selectedAdapter !== datasource.adapter){
+            this.updateAdapterProperties(datasource);
+        }
+    }
+
+    updateAdapterProperties = (datasource)=>{
+        this.selectedAdapter = datasource.adapter;
+        let adapter = this.state.adapters.find((adapter) => {
+            return adapter.name === this.selectedAdapter;
+        });
+        
+        if(typeof adapter !== "undefined"){
+            this.setState({schema:{
+                    ...this.state.schema,
+                    properties:{
+                        ...this.state.schema.properties,
+                        dataSourceProperties: adapter.dataSourcePropertiesSchema
                     }
-                });
-            }
+                }
+            });
         }
     }
 
     onFormSubmit = (event)=>{
-        let data = event.formData;
+        let data = JSON.stringify(this.state.datasource);
         let promise;
         if(this.state.editing){
             promise = DataSourceService.patch(this.props.match.params.id, data);
@@ -138,30 +149,38 @@ class EditDataSource extends Component {
             promise = DataSourceService.post(data);
         }
         promise.then((result) => {
-            toastr.success(`${data.name} saved with success!`);
-        }).reject((error) => {
-            toastr.error(`Error: ${error}`);
+            alertify.notify(`${this.state.datasource.name} saved with success!`,'success');
+            this.props.history.push('/datasources');
+        }).catch((error) => {
+            alertify.notify(`Error: ${error}`,'error');
         });
     }
 
+    cancelForm = ()=>{
+        this.props.history.push('/datasources');
+    }
+
     render() {
-        console.log(this.props);
         var text = "New";
         if(this.props.match.params.id){
             text = "Edit";
         }
         return (
             <div>
-                <div class="page-header">
+                <div className="page-header">
                     <h1>{text} DataSource</h1>
                 </div>
-                <hr/>
                 <Form schema={this.state.schema}
                     uiSchema={this.state.uiSchema}
                     onSubmit={this.onFormSubmit}
                     onChange={this.onFormChange}
                     formData={this.state.datasource}
-                />
+                >
+                <ButtonToolbar>
+                    <Button bsStyle="primary" type="submit">Submit</Button>
+                    <Button onClick={this.cancelForm}>Cancel</Button>
+                </ButtonToolbar>
+                </Form>
             </div>
         );
     }

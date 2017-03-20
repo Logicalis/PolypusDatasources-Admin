@@ -22,7 +22,7 @@ class DataSources extends Component {
     }
 
     getDataSources = ()=>{
-        DataSourceService.getAll().then((datasources) => {
+        return DataSourceService.getAll().then((datasources) => {
             this.setState({datasources});
         });
     }
@@ -36,18 +36,15 @@ class DataSources extends Component {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-            }).then(() => {
-                this.setState({
-                    datasources: this.state.datasources.filter((ds)=>{
-                        return ds._id !== datasource._id;
-                    })
-                });
-
+        }).then(() => {
+            DataSourceService.delete(datasource._id).then((result) => {
                 swal(
                     'Deleted!',
                     'Your DataSource '+ datasource.name +' has been deleted.',
                     'success'
-                )
+                );
+                return this.getDataSources();                
+            });
         });
     }
     
@@ -74,7 +71,7 @@ class DataSources extends Component {
                     </thead>
                     <tbody>
                         {this.state.datasources.map((datasource)=>{
-                            return <tr>
+                            return <tr key={datasource._id}>
                                 <td>{datasource._id}</td>
                                 <td>{datasource.name}</td>
                                 <td>{datasource.adapter}</td>

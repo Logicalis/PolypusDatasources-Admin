@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// import QueryService from '../service/QueryService';
+import QueryService from '../service/QueryService';
 
 class Queries extends Component {
 
@@ -22,6 +22,7 @@ class Queries extends Component {
         return (
             <div>
                 <h1>Queries</h1>
+                <div className="alert alert-danger" role="alert">Not implemented yet</div>
             </div>
         );
     }

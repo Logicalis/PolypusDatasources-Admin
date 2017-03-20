@@ -6,7 +6,7 @@ import BigText from 'big-text.js';
 
 import AdapterService from '../service/AdapterService';
 import DataSourceService from '../service/DataSourceService';
-//import QueryService from '../service/QueryService';
+import QueryService from '../service/QueryService';
 
 class Home extends Component {
 
@@ -15,7 +15,7 @@ class Home extends Component {
         this.state={
             adaptersCount: "",
             datasourcesCount: "",
-            queriesCount:"X"
+            queriesCount:""
         }
     }
 
@@ -25,6 +25,9 @@ class Home extends Component {
         });
         DataSourceService.getCount().then((count) => {
             this.setState({datasourcesCount: count});
+        });
+        QueryService.getCount().then((count) => {
+            this.setState({queriesCount: count});
         });
     }
 
@@ -41,7 +44,6 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>Home</h1>
                 <Grid>
                     <Col xs={12} md={4}>
                         <Panel style={{cursor: 'pointer'}} onClick={()=>{this.navigateTo('/adapters')}}>

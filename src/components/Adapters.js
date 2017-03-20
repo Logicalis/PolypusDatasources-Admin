@@ -59,7 +59,7 @@ class Adapters extends Component {
                     </thead>
                     <tbody>
                         {this.state.adapters.map((adapter)=>{
-                            return <tr>
+                            return <tr key={adapter.name}>
                                 <td>{adapter.displayName}</td>
                                 <td>{adapter.name}</td>
                                 <td><Button onClick={() => {

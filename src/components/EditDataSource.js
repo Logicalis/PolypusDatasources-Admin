@@ -12,6 +12,8 @@ import '../../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
 
 import {Button, ButtonToolbar} from 'react-bootstrap';
 
+import _ from 'lodash';
+
 var defaultSchema = {
     "title":"DataSource",
     "type": "object",
@@ -119,6 +121,10 @@ class EditDataSource extends Component {
         this.setState({datasource});
         if(this.selectedAdapter !== datasource.adapter){
             this.updateAdapterProperties(datasource);
+            this.setState({datasource: {
+                    ...this.state.datasource,
+                    dataSourceProperties:{}
+                }});
         }
     }
 
@@ -129,12 +135,31 @@ class EditDataSource extends Component {
         });
         
         if(typeof adapter !== "undefined"){
+
+           var dataSourceUiSchema = _.reduce(adapter.dataSourcePropertiesSchema.properties,(acc,value,key) => {
+                var prop = _.reduce(value,(acci,valuei,keyi) => {
+                    if(keyi.indexOf('ui:') === 0){
+                        acci[keyi] = valuei;
+                    }
+                    return acci;
+                },{});
+                if(Object.keys(prop).length > 0){
+                    acc[key] = prop;
+                }
+                return acc;
+            },{});
+
+            
             this.setState({schema:{
                     ...this.state.schema,
                     properties:{
                         ...this.state.schema.properties,
                         dataSourceProperties: adapter.dataSourcePropertiesSchema
                     }
+                },
+                uiSchema:{
+                    ...this.state.uiSchema,
+                    dataSourceProperties: dataSourceUiSchema
                 }
             });
         }

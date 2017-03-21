@@ -4,6 +4,8 @@ import AdapterService from '../service/AdapterService';
 
 import {Table,Button,ButtonToolbar, Glyphicon,Modal} from 'react-bootstrap';
 
+import {ObjectInspector} from 'react-inspector';
+
 class Adapters extends Component {
 
     constructor(props){
@@ -46,7 +48,7 @@ class Adapters extends Component {
                 <h1>Adapters</h1>
                 <div>Count: {this.state.adapters.length}</div>
                 <ButtonToolbar style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button disabled bsStyle="primary" onClick={this.reloadAdapters}>Reload Adapters</Button>
+                    {/*<Button disabled bsStyle="primary" onClick={this.reloadAdapters}>Reload Adapters</Button>*/}
                     <Button onClick={this.getAdapters}><Glyphicon glyph="refresh"/></Button>
                 </ButtonToolbar>
                 <Table responsive>
@@ -74,7 +76,9 @@ class Adapters extends Component {
                         <Modal.Title>{this.state.adapter ? this.state.adapter.displayName : ""}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {JSON.stringify(this.state.adapter)}
+                        <ObjectInspector data={this.state.adapter} name={this.state.adapter ? this.state.adapter.name : null} 
+                                expandLevel={5}
+                                />
                     </Modal.Body>  
                     <Modal.Footer>
                         <Button onClick={this.closeModal}>Close</Button>

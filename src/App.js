@@ -44,7 +44,7 @@ class App extends Component {
             <Nav>
               <li><NavLink to="/adapters">Adapters</NavLink></li> {/*TODO: active class*/}
               <li><NavLink to="/datasources">DataSources</NavLink></li>
-              <li><NavLink to="/queries">Queries</NavLink></li>
+              {/*<li><NavLink to="/queries">Queries</NavLink></li>*/}
             </Nav>
           </Navbar>
           
@@ -56,7 +56,7 @@ class App extends Component {
             <Route exact path="/datasources/:id/edit" component={EditDataSource}/>
             <Route exact path="/datasources/new" component={EditDataSource}/>
 
-            <Route exact path="/queries" component={Queries}/>
+            {/*<Route exact path="/queries" component={Queries}/>*/}
           </div>
           </div>
       </Router>

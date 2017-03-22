@@ -34,7 +34,7 @@ class Home extends Component {
     componentDidUpdate() {
         BigText(this.refs.bigText1);
         BigText(this.refs.bigText2);
-        BigText(this.refs.bigText3);
+        // BigText(this.refs.bigText3);
     }
 
     navigateTo = (url) =>{
@@ -61,14 +61,14 @@ class Home extends Component {
                             </div>
                         </Panel>
                     </Col>
-                    <Col xs={12} md={4}>
+                    {/*<Col xs={12} md={4}>
                         <Panel style={{cursor: 'pointer'}} onClick={()=>{this.navigateTo('/queries')}}>
                             <h2 style={{textAlign: 'center'}}>Queries</h2>
                             <div style={{height: '100px'}}>
                                 <span ref="bigText3">{this.state.queriesCount}</span>
                             </div>
                         </Panel>
-                    </Col>
+                    </Col>*/}
                 </Grid>
             </div>
         );

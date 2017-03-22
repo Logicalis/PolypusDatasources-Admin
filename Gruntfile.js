@@ -24,7 +24,7 @@ module.exports = function (grunt) {
             },
             release: {
                 files: [
-                    {cwd: "build", src: "*", dest: '/opt/logicalis/datasourceapi/admin'}
+                    {cwd: "build", src: "**/*", dest: '/opt/logicalis/datasourceapi/admin'}
                 ]
             }
         }

@@ -3,7 +3,7 @@ import './App.css';
 
 import {Navbar, Nav} from  'react-bootstrap';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Link,
   NavLink

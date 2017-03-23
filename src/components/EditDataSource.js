@@ -107,6 +107,7 @@ class EditDataSource extends Component {
         }).then(() => {
             if(this.state.editing){
                 DataSourceService.get(this.props.match.params.id).then((datasource) => {
+                    datasource.additionalProperties = JSON.stringify(datasource.additionalProperties);
                     this.setState({
                         datasource
                     });
@@ -166,7 +167,9 @@ class EditDataSource extends Component {
     }
 
     onFormSubmit = (event)=>{
-        let data = JSON.stringify(this.state.datasource);
+        let datasource = this.state.datasource;
+        datasource.additionalProperties = JSON.parse(datasource.additionalProperties);
+        let data = JSON.stringify(datasource);
         let promise;
         if(this.state.editing){
             promise = DataSourceService.patch(this.props.match.params.id, data);
@@ -174,7 +177,7 @@ class EditDataSource extends Component {
             promise = DataSourceService.post(data);
         }
         promise.then((result) => {
-            alertify.notify(`${this.state.datasource.name} saved with success!`,'success');
+            alertify.notify(`${datasource.name} saved with success!`,'success');
             this.props.history.push('/datasources');
         }).catch((error) => {
             alertify.notify(`Error: ${error}`,'error');

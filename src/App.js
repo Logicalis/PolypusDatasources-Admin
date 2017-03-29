@@ -38,7 +38,7 @@ class App extends Component {
           <Navbar inverse fixedTop>
             <Navbar.Header>
               <Navbar.Brand>
-                <Link to="/">DataSourceAPI</Link>
+                <Link to="/">Polypus Admin</Link>
               </Navbar.Brand>
             </Navbar.Header>
             <Nav>

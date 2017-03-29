@@ -6,9 +6,9 @@ module.exports = function (grunt) {
 
         easy_rpm: {
             options: {
-                name: 'datasourceapi-admin',
-                summary: 'DataSourceAPI Admin',
-                description: 'Static files for Web Admin client for DataSourceAPI',
+                name: 'polypus-admin',
+                summary: 'Polypus Admin',
+                description: 'Static files for Web Admin client for Polypus',
                 version: '<%= pkg.version %>',
                 release: grunt.config('build_number'),
                 buildArch: 'noarch',
@@ -17,14 +17,14 @@ module.exports = function (grunt) {
                 license: 'Closed',
                 defaultAttributes: {
                     mode: 644,
-                    user: 'datasourceapi',
-                    group: 'datasourceapi',
+                    user: 'polypus',
+                    group: 'polypus',
                     dirMode: 755
                 }
             },
             release: {
                 files: [
-                    {cwd: "build", src: "**/*", dest: '/opt/logicalis/datasourceapi/admin'}
+                    {cwd: "build", src: "**/*", dest: '/opt/polypus/admin'}
                 ]
             }
         }

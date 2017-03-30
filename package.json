@@ -23,6 +23,7 @@
     "react-router-dom": "^4.0.0",
     "sweetalert2": "^6.4.3"
   },
+   "homepage": ".",
   "scripts": {
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",

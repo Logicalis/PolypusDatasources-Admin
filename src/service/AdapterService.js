@@ -1,7 +1,7 @@
 import fetchJSON from '../helpers/fetchJSON';
 import config from '../config';
 
-var apiUrl = config.url;
+var apiUrl = config.getUrl();
 
 class AdapterService {
     static getAll(){

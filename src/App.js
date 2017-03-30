@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import {Navbar, Nav} from  'react-bootstrap';
+import {Navbar, Nav, FormControl, FormGroup, Button} from  'react-bootstrap';
 import {
   HashRouter as Router,
   Route,
@@ -17,6 +17,9 @@ import DataSources from './components/DataSources';
 import EditDataSource from './components/EditDataSource';
 import Queries from './components/Queries';
 
+import config from './config';
+
+var apiUrl = config.getUrl();
 
 class App extends Component {
 
@@ -26,10 +29,14 @@ class App extends Component {
     };
   }
   
-  componentWillMount(){
-    
+  componentDidMount() {
+    this.serverUrl.value = apiUrl;
   }
+  
 
+  updateURL = ()=>{
+    config.updateUrl(this.serverUrl.value);
+  }
 
   render() {
     return (
@@ -46,6 +53,15 @@ class App extends Component {
               <li><NavLink to="/datasources">DataSources</NavLink></li>
               {/*<li><NavLink to="/queries">Queries</NavLink></li>*/}
             </Nav>
+            <Navbar.Form pullRight>
+              <form>
+              <FormGroup>
+                <FormControl ref="serverUrl" type="text" placeholder="Server URL" inputRef={ref => { this.serverUrl = ref; }} />
+              </FormGroup>
+              {' '}
+              <Button type="submit" bsStyle="primary" onClick={this.updateURL}>Update</Button>
+              </form>
+            </Navbar.Form>
           </Navbar>
           
           <div className="container">

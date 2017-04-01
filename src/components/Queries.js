@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import QueryService from '../service/QueryService';
+// import QueryService from '../service/QueryService';
 
 class Queries extends Component {
 

@@ -1,5 +1,6 @@
 .navbar {
   background-color: #3f004a;
   border-color: #3f004a; }
-  .navbar .navbar-brand, .navbar .navbar-nav > li > a {
-    color: #d6d6d6; }
+
+.navbar .navbar-brand, .navbar .navbar-nav > li > a {
+  color: #d6d6d6; }

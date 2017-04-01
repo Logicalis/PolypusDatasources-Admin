@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Grid, Row, Col, Panel} from  'react-bootstrap';
+import {Grid, Col, Panel} from  'react-bootstrap';
 
 import BigText from 'big-text.js';
 

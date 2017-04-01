@@ -9,13 +9,13 @@ import {
   NavLink
 } from 'react-router-dom'
 
-import classNames from 'classnames';
+// import classNames from 'classnames';
 
 import Home from './components/Home';
 import Adapters from './components/Adapters';
 import DataSources from './components/DataSources';
 import EditDataSource from './components/EditDataSource';
-import Queries from './components/Queries';
+// import Queries from './components/Queries';
 
 import config from './config';
 

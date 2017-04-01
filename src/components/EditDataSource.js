@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { render } from "react-dom";
 
 import Form from "react-jsonschema-form";
 
@@ -69,7 +68,7 @@ var uiSchema = {
 class EditDataSource extends Component {
     constructor(props) {
         super(props);
-        props.match.params.id
+
         this.state = {
             schema: defaultSchema,
             uiSchema: uiSchema,

@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "alertifyjs": "^1.9.0",
-    "big-text.js": "^1.0.0",
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
+    "react-bigtext": "^1.0.1",
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
     "react-inspector": "^1.1.2",
@@ -23,15 +23,13 @@
     "react-router-dom": "^4.0.0",
     "sweetalert2": "^6.4.3"
   },
-   "homepage": ".",
+  "homepage": ".",
   "scripts": {
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "build": "npm run build-css && react-scripts build",
-    
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "grunt": "grunt"
